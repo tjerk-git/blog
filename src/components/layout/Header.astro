@@ -4,6 +4,9 @@ import { MENU_LINKS } from "@/data/constants";
 
 const url = new URL(Astro.request.url);
 ---
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 <script>
 	import { toggleClass } from "@/utils";
@@ -18,6 +21,23 @@ const url = new URL(Astro.request.url);
 			menuOpen = !menuOpen;
 			toggleMenuButton.setAttribute("aria-expanded", menuOpen.toString());
 		});
+
+		const navLinks = document.querySelectorAll("nav a");
+
+		navLinks.forEach((link) => {
+			link.classList.remove("active");
+
+			// `slice` here to remove the first `/` in pathname
+			const currentPath = window.location.pathname.slice(1);
+
+			const hrefArray = link.href.split("/");
+			const thisPath = hrefArray[hrefArray.length - 1];
+
+			if (currentPath === thisPath) {
+				link.classList.add("border-indigo-500");
+			}
+		});
+
 	});
 </script>
 
@@ -33,14 +53,14 @@ const url = new URL(Astro.request.url);
 		</a>
 		<nav
 			id="navigation-menu"
-			class="absolute -inset-x-4 top-14 hidden flex-col items-end gap-y-4 rounded-md bg-[color:var(--theme-menu-bg)] py-4 text-accent shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:mt-1 sm:-ml-4 sm:flex sm:flex-row sm:items-center sm:divide-x sm:divide-dashed sm:divide-accent sm:rounded-none sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
+			class="absolute -inset-x-4 top-14 hidden flex-col items-end gap-y-4 rounded-md bg-[color:var(--theme-menu-bg)] py-4 text-w shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:mt-1 sm:-ml-4 sm:flex sm:flex-row sm:items-center  sm:rounded-none sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
 			aria-label="Main menu"
 		>
 			{
 				MENU_LINKS.map((link) => (
 					<a
 						href={link.path}
-						class="py-4 px-4 sm:py-0 sm:hover:underline"
+						class="py-4 px-4 sm:py-0 border-b-4"
 						aria-current={url.pathname === link.path ? "page" : false}
 						rel="prefetch"
 					>
@@ -88,3 +108,4 @@ const url = new URL(Astro.request.url);
 		</svg>
 	</button>
 </header>
+

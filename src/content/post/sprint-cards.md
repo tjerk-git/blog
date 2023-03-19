@@ -9,7 +9,7 @@ tags: ["projects"]
 
 Check it out here! : [Sprint Cards](https://sprint.cards)
 
-![Sprint Cards](/public/sprint_cards.png)
+![Sprint Cards](/sprint_cards.png)
 
 At [CMD LWD](https://blog.cmdlwd.nl/) we like to challenge our students to start their own side-projects.
 But what my co-workers and I noticed is that students who are new in this design field often don't have creative input for their own fun hobby projects.
